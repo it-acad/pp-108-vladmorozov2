@@ -7,7 +7,7 @@ from utils.permissions import is_admin
 @user_passes_test(is_admin)
 def list_authors(request):
     authors = Author.get_all()
-    return render(request, "management/authors/list_authors.html", {"authors": authors})
+    return render(request, "authors/list_authors.html", {"authors": authors})
 
 
 @user_passes_test(is_admin)
@@ -23,11 +23,11 @@ def create_author(request):
         else:
             return render(
                 request,
-                "management/authors/create_author.html",
+                "authors/create_author.html",
                 {"error": "All fields are required."},
             )
 
-    return render(request, "management/authors/create_author.html")
+    return render(request, "authors/create_author.html")
 
 
 @user_passes_test(is_admin)
@@ -43,11 +43,11 @@ def create_author(request):
         else:
             return render(
                 request,
-                "management/authors/create_author.html",
+                "authors/create_author.html",
                 {"error": "All fields are required."},
             )
 
-    return render(request, "management/authors/create_author.html")
+    return render(request, "authors/create_author.html")
 
 
 from django.http import HttpResponse
