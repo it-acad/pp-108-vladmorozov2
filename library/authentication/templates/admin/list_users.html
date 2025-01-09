@@ -1,20 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>All Users</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <h1>All Users</h1>
-    <ul>
-        {% for user in users %}
-        <li>
-            <a href="{% url 'admin_view_user' user.id %}">{{ user.first_name }} {{ user.last_name }} ({{ user.email
-                }})</a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="form" style="height: auto; max-width: 800px; margin: 0 auto;">
+        <div class="title">All Users</div>
+        <div class="subtitle">Manage all registered users</div>
+
+        <ul style="list-style: none; padding: 0; margin-top: 20px; color: #eee;">
+            {% for user in users %}
+            <li
+                style="background-color: #303245; color: #eee; padding: 15px 30px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <a href="{% url 'admin_view_user' user.id %}"
+                    style="color: #08d; text-decoration: none; font-weight: bold; flex: 1;">
+                    {{ user.first_name }} {{ user.last_name }} ({{ user.email }})
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
 </body>
 
 </html>

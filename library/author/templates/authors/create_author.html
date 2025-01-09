@@ -1,29 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Author</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <h1>Create a New Author</h1>
-    <form method="POST">
+    <form class="form" method="POST">
         {% csrf_token %}
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required><br>
+        <div class="title">Create Author</div>
+        <div class="subtitle">Enter the details below</div>
 
-        <label for="surname">Surname:</label>
-        <input type="text" id="surname" name="surname" required><br>
+        <div class="input-container ic1">
+            <input id="name" name="name" class="input" type="text" placeholder=" " required />
+            <div class="cut"></div>
+            <label for="name" class="placeholder">Name</label>
+        </div>
 
-        <label for="patronymic">Patronymic:</label>
-        <input type="text" id="patronymic" name="patronymic" required><br>
+        <div class="input-container ic2">
+            <input id="surname" name="surname" class="input" type="text" placeholder=" " required />
+            <div class="cut"></div>
+            <label for="surname" class="placeholder">Surname</label>
+        </div>
 
-        <button type="submit">Create Author</button>
+        <div class="input-container ic2">
+            <input id="patronymic" name="patronymic" class="input" type="text" placeholder=" " required />
+            <div class="cut"></div>
+            <label for="patronymic" class="placeholder">Patronymic</label>
+        </div>
+
+        <button type="submit" class="submit">Create Author</button>
     </form>
-    {% if error %}
-    <p style="color: red;">{{ error }}</p>
-    {% endif %}
-    <a href="{% url 'list_authors' %}">Back to Authors</a>
 </body>
 
 </html>

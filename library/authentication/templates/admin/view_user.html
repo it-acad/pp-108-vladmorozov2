@@ -1,21 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Details</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <h1>User Details</h1>
-    <ul>
-        <li><strong>ID:</strong> {{ user.id }}</li>
-        <li><strong>First Name:</strong> {{ user.first_name }}</li>
-        <li><strong>Last Name:</strong> {{ user.last_name }}</li>
-        <li><strong>Email:</strong> {{ user.email }}</li>
-        <li><strong>Role:</strong> {{ user.get_role_name }}</li>
-        <li><strong>Is Active:</strong> {{ user.is_active }}</li>
-    </ul>
-    <a href="{% url 'admin_list_users' %}">Back to All Users</a>
+    <div class="form" style="height: auto;">
+        <div class="title">User Details</div>
+        <div class="subtitle">Detailed information about the user</div>
+
+        <ul style="list-style: none; padding: 0; margin-top: 20px; color: #eee;">
+            <li><strong>ID:</strong> {{ user.id }}</li>
+            <li><strong>First Name:</strong> {{ user.first_name }}</li>
+            <li><strong>Last Name:</strong> {{ user.last_name }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li><strong>Role:</strong> {{ user.get_role_name }}</li>
+            <li><strong>Is Active:</strong> {{ user.is_active }}</li>
+        </ul>
+
+        <button onclick="location.href='{% url 'admin_list_users' %}'" class="submit"
+            style="display: inline-block; margin-top: 20px; text-align: center; background-color: #08d; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+            Back to All Users
+        </button>
+
+    </div>
 </body>
 
 </html>

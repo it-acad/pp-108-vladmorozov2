@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Authors</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <h1>All Authors</h1>
-    <a href="{% url 'create_author' %}">Create New Author</a>
-    <ul>
-        {% for author in authors %}
-        <li>
-            {{ author.name }}
-            <a href="{% url 'delete_author' author.id %}">Delete</a>
-        </li>
-        {% endfor %}
-    </ul>
+    <div class="form">
+        <div class="title">All Authors</div>
+        <div class="subtitle">Manage your authors</div>
+
+        <ul style="list-style: none; padding: 0; margin-top: 20px;">
+            {% for author in authors %}
+            <li
+                style="display: flex; justify-content: space-between; align-items: center; background-color: #303245; color: #eee; padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+                <span style="flex: 1;">{{ author.name }}</span>
+                <a href="{% url 'delete_author' author.id %}"
+                    style="background-color: #dc2f55; color: white; text-decoration: none; padding: 5px 10px; border-radius: 5px; font-size: 12px; display: inline-flex; align-items: center; justify-content: center;">Delete</a>
+            </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'create_author' %}"
+            style="display: inline-block; margin-bottom: 20px; background-color: #08d; color: white; text-decoration: none; padding: 10px 20px; border-radius: 5px; font-size: 14px; text-align: center;">Create
+            New Author</a>
+    </div>
 </body>
 
 </html>

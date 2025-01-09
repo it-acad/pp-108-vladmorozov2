@@ -1,13 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logout</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <h1>You have successfully logged out!</h1>
-    <a href="{% url 'login' %}">Login again</a>
+    <div class="form" style="text-align: center; height: auto;">
+        <div class="title">Logged Out</div>
+        <div class="subtitle">You have successfully logged out!</div>
+
+        <a href="{% url 'login' %}" class="submit"
+            style="display: inline-block; margin-top: 20px; text-align: center;">Login Again</a>
+    </div>
 </body>
 
 </html>

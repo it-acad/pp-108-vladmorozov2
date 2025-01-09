@@ -1,24 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 
 <body>
-    <h1>Welcome to the Home Page</h1>
-    <h2>User Information</h2>
-    <ul>
-        <li><strong>ID:</strong> {{ user.id }}</li>
-        <li><strong>First Name:</strong> {{ user.first_name }}</li>
-        <li><strong>Last Name:</strong> {{ user.last_name }}</li>
-        <li><strong>Email:</strong> {{ user.email }}</li>
-        <li><strong>Role:</strong> {{ user.get_role_name }}</li>
-        <li><strong>Is Active:</strong> {{ user.is_active }}</li>
-        <li><strong>Created At:</strong> {{ user.created_at }}</li>
-        <li><strong>Updated At:</strong> {{ user.updated_at }}</li>
-    </ul>
-    <a href="{% url 'logout' %}">Logout</a>
+    <div class="form" style="height: auto;">
+        <div class="title">Welcome to the Home Page</div>
+        <div class="subtitle">User Information</div>
+
+        <ul style="list-style: none; padding: 0; margin-top: 20px; color: #eee;">
+            <li><strong>ID:</strong> {{ user.id }}</li>
+            <li><strong>First Name:</strong> {{ user.first_name }}</li>
+            <li><strong>Last Name:</strong> {{ user.last_name }}</li>
+            <li><strong>Email:</strong> {{ user.email }}</li>
+            <li><strong>Role:</strong> {{ user.get_role_name }}</li>
+            <li><strong>Is Active:</strong> {{ user.is_active }}</li>
+            <li><strong>Created At:</strong> {{ user.created_at }}</li>
+            <li><strong>Updated At:</strong> {{ user.updated_at }}</li>
+        </ul>
+
+        <a href="{% url 'logout' %}" class="submit"
+            style="display: inline-block; margin-top: 20px; text-align: center;">Logout</a>
+    </div>
 </body>
 
 </html>
