@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Authors</title>
+</head>
+
+<body>
+    <h1>All Authors</h1>
+    <a href="{% url 'create_author' %}">Create New Author</a>
+    <ul>
+        {% for author in authors %}
+        <li>
+            {{ author.name }}
+            <a href="{% url 'delete_author' author.id %}">Delete</a>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>

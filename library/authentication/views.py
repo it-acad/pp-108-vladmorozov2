@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from .models import CustomUser
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
+from utils.permissions import is_admin
 
 
 # Registration view
@@ -65,10 +66,6 @@ def home(request):
     if not request.user.is_authenticated:
         return redirect("login")
     return render(request, "authentication/home.html")
-
-
-def is_admin(user):
-    return user.is_authenticated and user.role == 1
 
 
 @user_passes_test(is_admin)
