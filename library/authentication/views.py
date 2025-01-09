@@ -1,9 +1,10 @@
 # Create your views here.
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import login, logout
 from django.http import HttpResponse
 from .models import CustomUser
-from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import get_object_or_404
 
 
 # Registration view
@@ -64,3 +65,19 @@ def home(request):
     if not request.user.is_authenticated:
         return redirect("login")
     return render(request, "authentication/home.html")
+
+
+def is_admin(user):
+    return user.is_authenticated and user.role == 1
+
+
+@user_passes_test(is_admin)
+def list_users(request):
+    users = CustomUser.objects.all()
+    return render(request, "admin/list_users.html", {"users": users})
+
+
+@user_passes_test(is_admin)
+def view_user(request, user_id):
+    user = get_object_or_404(CustomUser, id=user_id)
+    return render(request, "admin/view_user.html", {"user": user})
