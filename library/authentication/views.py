@@ -1,11 +1,13 @@
 # Create your views here.
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, authenticate
 from django.http import HttpResponse
 from .models import CustomUser
 from django.contrib.auth.decorators import user_passes_test
 from django.shortcuts import get_object_or_404
 from utils.permissions import is_admin
+from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 
 # Registration view
@@ -23,7 +25,12 @@ def register(request):
         if CustomUser.get_by_email(email):
             return HttpResponse("User with this email already exists!", status=400)
 
-        user = CustomUser.create(
+        User = get_user_model()
+        if User.objects.filter(email=email).exists():
+            messages.error(request, "Email is already registered.")
+            return render(request, "authentication/register.html")
+
+        user = User.objects.create_user(
             email=email,
             password=password,
             first_name=first_name,
@@ -38,18 +45,18 @@ def register(request):
     return render(request, "authentication/register.html")
 
 
-# Login view
 def user_login(request):
     if request.method == "POST":
         email = request.POST.get("email")
         password = request.POST.get("password")
 
-        user = CustomUser.get_by_email(email=email)
-        if user and user.password == password:
-            user.backend = "django.contrib.auth.backends.ModelBackend"
-            login(request, user)  # Логін
+        user = CustomUser.get_by_email(email)
+
+        if user is not None and user.check_password(password):
+            login(request, user)
             return redirect("home")
-        return HttpResponse("Invalid credentials!", status=401)
+        else:
+            return HttpResponse("Invalid credentials!", status=401)
 
     return render(request, "authentication/login.html")
 
