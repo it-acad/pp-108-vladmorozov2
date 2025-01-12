@@ -1,52 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-</head>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+  </head>
 
-<body>
-    <form class="form" method="POST" style="height: auto;">
-        {% csrf_token %}
-        <div class="title">Register</div>
-        <div class="subtitle">Enter your details below</div>
+  <body>
+    <form class="form" method="POST" style="height: auto">
+      {% csrf_token %}
+      <div class="title">Register</div>
+      <div class="subtitle">Enter your details below</div>
 
-        <div class="input-container ic1">
-            <input id="first_name" name="first_name" class="input" type="text" placeholder=" " required />
-            <div class="cut"></div>
-            <label for="first_name" class="placeholder">First Name</label>
-        </div>
+      <div class="input-container ic1">
+        <input
+          id="first_name"
+          name="first_name"
+          class="input"
+          type="text"
+          placeholder=" "
+          required
+        />
+        <div class="cut"></div>
+        <label for="first_name" class="placeholder">First Name</label>
+      </div>
 
-        <div class="input-container ic2">
-            <input id="middle_name" name="middle_name" class="input" type="text" placeholder=" " required />
-            <div class="cut"></div>
-            <label for="middle_name" class="placeholder">Middle Name</label>
-        </div>
+      <div class="input-container ic2">
+        <input
+          id="middle_name"
+          name="middle_name"
+          class="input"
+          type="text"
+          placeholder=" "
+          required
+        />
+        <div class="cut"></div>
+        <label for="middle_name" class="placeholder">Middle Name</label>
+      </div>
 
-        <div class="input-container ic2">
-            <input id="last_name" name="last_name" class="input" type="text" placeholder=" " required />
-            <div class="cut"></div>
-            <label for="last_name" class="placeholder">Last Name</label>
-        </div>
+      <div class="input-container ic2">
+        <input
+          id="last_name"
+          name="last_name"
+          class="input"
+          type="text"
+          placeholder=" "
+          required
+        />
+        <div class="cut"></div>
+        <label for="last_name" class="placeholder">Last Name</label>
+      </div>
 
-        <div class="input-container ic2">
-            <input id="email" name="email" class="input" type="email" placeholder=" " required />
-            <div class="cut"></div>
-            <label for="email" class="placeholder">Email</label>
-        </div>
+      <div class="input-container ic2">
+        <input
+          id="email"
+          name="email"
+          class="input"
+          type="email"
+          placeholder=" "
+          required
+        />
+        <div class="cut"></div>
+        <label for="email" class="placeholder">Email</label>
+      </div>
 
-        <div class="input-container ic2">
-            <input id="password" name="password" class="input" type="password" placeholder=" " required />
-            <div class="cut"></div>
-            <label for="password" class="placeholder">Password</label>
-        </div>
+      <div class="input-container ic2">
+        <input
+          id="password"
+          name="password"
+          class="input"
+          type="password"
+          placeholder=" "
+          required
+        />
+        <div class="cut"></div>
+        <label for="password" class="placeholder">Password</label>
+      </div>
+      <div class="input-container ic2">
+        <select id="roles" name="roles" class="input">
+          <option value="" disabled selected>Select your role</option>
+          <option value="0">Visitor</option>
+          <option value="1">Librarian</option>
+        </select>
+        <div class="cut"></div>
+        <label for="roles" class="placeholder">Role</label>
+      </div>
 
-        <button type="submit" class="submit">Register</button>
+      <button type="submit" class="submit">Register</button>
     </form>
-</body>
-
+  </body>
 </html>

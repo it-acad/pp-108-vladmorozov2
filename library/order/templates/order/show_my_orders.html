@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Orders</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background-color: #f4f7fc;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      h1 {
+        text-align: center;
+        color: #4caf50;
+        margin-top: 40px;
+      }
+
+      table {
+        width: 80%;
+        margin: 40px auto;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        padding: 12px;
+        text-align: center;
+        border: 1px solid #ddd;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+        font-size: 1.1rem;
+      }
+
+      td {
+        font-size: 1rem;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      tr:hover {
+        background-color: #e2e2e2;
+      }
+
+      .status {
+        font-weight: bold;
+      }
+
+      .no-orders {
+        text-align: center;
+        font-size: 1.2rem;
+        color: #999;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My Orders</h1>
+
+    {% if orders %}
+    <table>
+      <thead>
+        <tr>
+          <th>Order ID</th>
+          <th>Book</th>
+          <th>Planned End Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{ order.pk }}</td>
+          <td>{{ order.book.name }}</td>
+          <td>{{ order.plated_end_at|date:"M. d, Y, H:i" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <p class="no-orders">You have no orders at the moment.</p>
+    {% endif %}
+  </body>
+</html>

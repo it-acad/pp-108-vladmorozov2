@@ -1,6 +1,7 @@
 import datetime
 
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import PermissionsMixin
 from django.db import models
 
 ROLE_CHOICES = (
@@ -14,14 +15,23 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError("The Email field must be set")
         email = self.normalize_email(email)
-        user = self.model(email=email, **extra_fields)
+        user = self.model(
+            email=email, **extra_fields
+        )  # Використовуємо self.model, що повинно бути CustomUser
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, password=None, **extra_fields):
+        print(f"Creating superuser with email: {email}")  # Debug output
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("first_name", "Admin")
+        extra_fields.setdefault("last_name", "Admin")
+        extra_fields.setdefault("middle_name", "Admin")
+        extra_fields.setdefault("is_staff", True)
+        extra_fields.setdefault("is_superuser", True)
+        extra_fields.setdefault("role", 1)
 
         if extra_fields.get("is_staff") is not True:
             raise ValueError("Superuser must have is_staff=True.")
@@ -31,7 +41,7 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     """
     This class represents a basic user. \n
     Attributes:
@@ -66,6 +76,8 @@ class CustomUser(AbstractBaseUser):
     role = models.IntegerField(choices=ROLE_CHOICES, default=0)
     is_active = models.BooleanField(default=True)
     id = models.AutoField(primary_key=True)
+    is_staff = models.BooleanField(default=False)  # Add this field
+    is_superuser = models.BooleanField(default=False)  # Add this field
 
     USERNAME_FIELD = "email"
     objects = CustomUserManager()
@@ -234,3 +246,14 @@ class CustomUser(AbstractBaseUser):
         returns str role name
         """
         return ROLE_CHOICES[self.role][1]
+
+    
+    def has_perm(self, perm, obj=None):
+        if self.is_superuser:
+            return True  # Allow superusers all permissions
+        return super().has_perm(perm, obj)
+
+    def has_module_perms(self, app_label):
+        if self.is_superuser:
+            return True  # Allow superusers access to all modules
+        return super().has_module_perms(app_label)

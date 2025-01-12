@@ -11,6 +11,8 @@ from django.contrib.auth import get_user_model
 
 
 # Registration view
+
+
 def register(request):
     if request.method == "POST":
         first_name = request.POST.get("first_name")
@@ -18,6 +20,7 @@ def register(request):
         last_name = request.POST.get("last_name")
         email = request.POST.get("email")
         password = request.POST.get("password")
+        role = request.POST.get("roles")
 
         if not first_name or not last_name or not email or not password:
             return HttpResponse("All fields are required!", status=400)
@@ -36,6 +39,7 @@ def register(request):
             first_name=first_name,
             middle_name=middle_name,
             last_name=last_name,
+            role=role,
         )
 
         if user:
@@ -75,13 +79,17 @@ def home(request):
     return render(request, "authentication/home.html")
 
 
-@user_passes_test(is_admin)
+def is_librarian(user):
+    return user.is_authenticated and user.role == 1  # Check if role is 'Librarian'
+
+
+@user_passes_test(is_librarian)
 def list_users(request):
     users = CustomUser.objects.all()
     return render(request, "admin/list_users.html", {"users": users})
 
 
-@user_passes_test(is_admin)
+@user_passes_test(is_librarian)
 def view_user(request, user_id):
     user = get_object_or_404(CustomUser, id=user_id)
     return render(request, "admin/view_user.html", {"user": user})

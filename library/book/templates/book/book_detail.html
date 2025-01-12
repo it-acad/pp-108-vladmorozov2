@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ book.name }} - Details</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 0;
+        color: #333;
+      }
+
+      header {
+        background-color: #4caf50;
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2rem;
+      }
+
+      main {
+        margin: 2rem auto;
+        max-width: 700px;
+        padding: 1.5rem;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      main h2 {
+        color: #4caf50;
+        font-size: 1.6rem;
+        margin-bottom: 1rem;
+      }
+
+      main p {
+        margin: 0.5rem 0 1rem;
+        font-size: 1rem;
+      }
+
+      ul {
+        list-style-type: none;
+        margin: 0 0 1rem 0;
+        padding: 0;
+      }
+
+      ul li {
+        display: flex;
+        align-items: center;
+        margin: 0.5rem 0;
+        background: #f9f9f9;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        transition: box-shadow 0.3s ease;
+      }
+
+      ul li:hover {
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      ul li span {
+        font-weight: bold;
+        margin-right: 0.5rem;
+        color: #4caf50;
+      }
+
+      a {
+        display: inline-block;
+        margin-top: 1rem;
+        padding: 0.7rem 1.5rem;
+        background-color: #4caf50;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+        font-size: 1rem;
+      }
+
+      a:hover {
+        background-color: #45a049;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 2rem;
+        font-size: 0.9rem;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>{{ book.name }}</h1>
+    </header>
+    <main>
+      <h2>Book Details</h2>
+      <p><strong>Description:</strong> {{ book.description }}</p>
+      <p><strong>Authors:</strong></p>
+      {% if authors %}
+      <ul>
+        {% for author in authors %}
+        <li>
+          <span>{{ forloop.counter }}.</span> 
+          {{ author.name }} {{ author.surname }}
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p><em>No authors available for this book.</em></p>
+      {% endif %}
+      <a href="{% url 'show_all_books' %}">Back to All Books</a>
+    </main>
+  </body>
+</html>
