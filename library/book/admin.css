@@ -1,0 +1,43 @@
+/* admin.css */
+
+/* Styling for the static information section */
+fieldset#static-information {
+  background-color: #e0f7fa; /* Light blue background */
+  border: 2px solid #0288d1; /* Darker blue border */
+  margin-bottom: 20px;
+}
+
+fieldset#static-information legend {
+  background-color: #0288d1;
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+/* Styling for the dynamic information section */
+fieldset#dynamic-information {
+  background-color: #fff9c4; /* Light yellow background */
+  border: 2px solid #fbc02d; /* Darker yellow border */
+  margin-bottom: 20px;
+}
+
+fieldset#dynamic-information legend {
+  background-color: #fbc02d;
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+/* Styling for the additional information section */
+fieldset#additional-information {
+  background-color: #f1f8e9; /* Light green background */
+  border: 2px solid #388e3c; /* Dark green border */
+  margin-bottom: 20px;
+}
+
+fieldset#additional-information legend {
+  background-color: #388e3c;
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold;
+}

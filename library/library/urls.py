@@ -21,7 +21,7 @@ urlpatterns = [
     path("auth/", include("authentication.urls")),
     path("author/", include("author.urls")),
     path("book/", include("book.urls")),
-    path("admin/", include("authentication.urls")),
-    # path("admin/", admin.site.urls),
+    # path("admin/", include("authentication.urls")),
+    path("admin/", admin.site.urls),
     path("order/", include("order.urls")),
 ]

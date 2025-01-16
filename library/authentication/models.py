@@ -156,11 +156,11 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ):
             custom_user = CustomUser(
                 email=email,
-                password=password,
                 first_name=first_name,
                 middle_name=middle_name,
                 last_name=last_name,
             )
+            custom_user.set_password(password)
             custom_user.save()
             return custom_user
         return None
@@ -227,7 +227,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         if middle_name != None and len(middle_name) <= 20:
             user_to_update.middle_name = middle_name
         if password != None:
-            user_to_update.password = password
+            user_to_update.set_password(password)
         if role != None:
             user_to_update.role = role
         if is_active != None:
@@ -247,7 +247,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         """
         return ROLE_CHOICES[self.role][1]
 
-    
     def has_perm(self, perm, obj=None):
         if self.is_superuser:
             return True  # Allow superusers all permissions
